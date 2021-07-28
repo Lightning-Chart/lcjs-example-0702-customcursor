@@ -16,23 +16,15 @@ const {
   AutoCursorModes,
   UIElementBuilders,
   UILayoutBuilders,
-  UIBackgrounds,
-  ColorHEX,
-  ColorCSS,
-  SolidFill,
-  SolidLine,
   UIOrigins,
   translatePoint,
   Themes,
 } = lcjs;
 
-// colors of the series
-const colors = ["#fc03f0", "#1cb843", "#595cff", "#0955ff", "#500c3f"];
-
 // Create a XY Chart.
 const chart = lightningChart()
   .ChartXY({
-    // theme: Themes.dark
+    // theme: Themes.darkGold
   })
   // Disable native AutoCursor to create custom
   .setAutoCursorMode(AutoCursorModes.disabled)
@@ -43,12 +35,12 @@ chart.getDefaultAxisY().setTitle("Y-axis");
 
 // generate data and creating the series
 const series = new Array(3).fill(0).map((_, iSeries) => {
-  const nSeries = chart.addLineSeries().setStrokeStyle(
-    new SolidLine({
-      fillStyle: new SolidFill({ color: ColorHEX(colors[iSeries]) }),
-      thickness: 2,
-    })
-  );
+  const nSeries = chart.addLineSeries({
+    dataPattern: {
+        // pattern: 'ProgressiveX' => Each consecutive data point has increased X coordinate.
+        pattern: 'ProgressiveX'
+    }
+  })
 
   createProgressiveTraceGenerator()
     .setNumberOfPoints(200)
@@ -60,10 +52,13 @@ const series = new Array(3).fill(0).map((_, iSeries) => {
   return nSeries;
 });
 
+// Add Legend.
+const legend = chart.addLegendBox().add(chart)
+
 // Create UI elements for custom cursor.
 const resultTable = chart
   .addUIElement(
-    UILayoutBuilders.Column.setBackground(UIBackgrounds.Rectangle),
+    UILayoutBuilders.Column,
     {
       x: chart.getDefaultAxisX(),
       y: chart.getDefaultAxisY(),
@@ -72,49 +67,34 @@ const resultTable = chart
   .setMouseInteractions(false)
   .setOrigin(UIOrigins.LeftBottom)
   .setMargin(5)
-  .setBackground((background) =>
-    background.setStrokeStyle(
-      new SolidLine({
-        thickness: 1,
-        fillStyle: new SolidFill({ color: ColorCSS("gray") }),
-      })
-    )
+  .setBackground((background) => background
+     // Style same as Theme result table.
+     .setFillStyle(chart.getTheme().resultTableFillStyle)
+     .setStrokeStyle(chart.getTheme().resultTableStrokeStyle)
   );
 
 const rowX = resultTable
   .addElement(UILayoutBuilders.Row)
   .addElement(UIElementBuilders.TextBox)
-  .setTextFont((font) => font.setSize(14))
-  .setTextFillStyle(new SolidFill({ color: ColorCSS("gray") }));
 
 const rowsY = series.map((el, i) => {
   return resultTable
     .addElement(UILayoutBuilders.Row)
     .addElement(UIElementBuilders.TextBox)
-    .setTextFont((font) => font.setSize(14))
-    .setTextFillStyle(new SolidFill({ color: ColorHEX(colors[i]) }));
+    .setTextFillStyle(series[i].getStrokeStyle().getFillStyle());
 });
 
 const tickX = chart
   .getDefaultAxisX()
   .addCustomTick()
-  .setGridStrokeStyle(
-    new SolidLine({
-      thickness: 1,
-      fillStyle: new SolidFill({ color: ColorCSS("gray") }),
-    })
-  );
 
-const ticksY = series.map((el) => {
+const ticksY = series.map((el, i) => {
   return chart
     .getDefaultAxisY()
     .addCustomTick()
-    .setGridStrokeStyle(
-      new SolidLine({
-        thickness: 1,
-        fillStyle: new SolidFill({ color: ColorCSS("gray") }),
-      })
-    );
+    .setMarker((marker) => marker
+      .setTextFillStyle(series[i].getStrokeStyle().getFillStyle())
+    )
 });
 
 // Hide custom cursor components initially.
@@ -183,9 +163,9 @@ chart.onSeriesBackgroundMouseMove((_, event) => {
     }
 
     // Format result table text.
-    rowX.setText(`X: ${nearestPoint.location.x.toFixed(1)}`);
+    rowX.setText(`X: ${chart.getDefaultAxisX().formatValue(nearestPoint.location.x)}`);
     rowsY.map((rowY, i) => {
-      rowY.setText(`Y${i}: ${nearestDataPoints[i].location.y.toFixed(2)}`);
+      rowY.setText(`Y${i}: ${chart.getDefaultAxisY().formatValue(nearestDataPoints[i].location.y)}`);
     });
 
     // Position custom ticks.
