@@ -23,6 +23,8 @@ This example serves as an example for creating a custom cursor for XY charts.
 
 Custom cursors can be required for different purposes - like major structural changes or very application specific styling requirements.
 
+If lesser changes to default cursors are required then please see read about different methods of configuring cursor behavior - `ChartXY` API reference has good links and explanations to follow.
+
 Custom cursors are most importantly based on `LCJS` methods that allow solving nearest data points in series from any supplied location.
 Custom user interactions and data point solving require solid understanding of different coordinate systems in web and `LCJS`, which is the primary reason this example exists;
 
