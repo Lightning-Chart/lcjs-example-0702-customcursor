@@ -107,18 +107,18 @@ Direct developer email support can be purchased through a [Support Plan][4] or b
 © Arction Ltd 2009-2020. All rights reserved.
 
 
-[Lightning Chart top reference]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/interfaces/lightningchart.html
-[Coordinate system translation method]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/globals.html#translatepoint
-[Auto cursor modes]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/enums/autocursormodes.html
-[UI element builders]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/globals.html#uielementbuilders
-[UI layout builders]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/globals.html#uilayoutbuilders
-[UI backgrounds]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/globals.html#uibackgrounds
-[UI position origin]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/globals.html#uiorigins
-[Color factory hexadecimal]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/globals.html#colorhex
-[Color factory css]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/globals.html#colorcss
-[Solid fill style]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/classes/solidfill.html
-[Solid line style]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/classes/solidline.html
-[Chart XY]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/classes/chartxy.html
-[Axis XY]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/classes/axis.html
-[Custom tick]: https://www.arction.com/lightningchart-js-api-documentation/v3.3.0/classes/customtick.html
+[Lightning Chart top reference]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/interfaces/lightningchart.html
+[Coordinate system translation method]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/globals.html#translatepoint
+[Auto cursor modes]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/enums/autocursormodes.html
+[UI element builders]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/globals.html#uielementbuilders
+[UI layout builders]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/globals.html#uilayoutbuilders
+[UI backgrounds]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/globals.html#uibackgrounds
+[UI position origin]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/globals.html#uiorigins
+[Color factory hexadecimal]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/globals.html#colorhex
+[Color factory css]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/globals.html#colorcss
+[Solid fill style]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/classes/solidfill.html
+[Solid line style]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/classes/solidline.html
+[Chart XY]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/classes/chartxy.html
+[Axis XY]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/classes/axis.html
+[Custom tick]: https://www.arction.com/lightningchart-js-api-documentation/v3.4.0/classes/customtick.html
 

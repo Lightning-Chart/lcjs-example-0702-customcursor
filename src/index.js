@@ -87,11 +87,13 @@ const rowsY = series.map((el, i) => {
 const tickX = chart
   .getDefaultAxisX()
   .addCustomTick()
+  .setAllocatesAxisSpace(false)
 
 const ticksY = series.map((el, i) => {
   return chart
     .getDefaultAxisY()
     .addCustomTick()
+    .setAllocatesAxisSpace(false)
     .setMarker((marker) => marker
       .setTextFillStyle(series[i].getStrokeStyle().getFillStyle())
     )
