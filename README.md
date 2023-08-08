@@ -32,27 +32,11 @@ Custom user interactions and data point solving require solid understanding of d
 // Add custom action when user moves mouse over series area.
 chart.onSeriesBackgroundMouseMove((_, event) => {
     // `event` is a native JavaScript event, which packs the active mouse location in `clientX` and `clientY` properties.
-    const mouseLocationClient = { x: event.clientX, y: event.clientY }
+    // it can be used for solving nearest data point ...
+    const nearestDataPoint = series.solveNearestFromScreen(event)
 
-    // Before using client coordinates with LCJS, the coordinates have to be translated relative to the LCJS engine.
-    const mouseLocationEngine = chart.engine.clientLocation2Engine(mouseLocationClient.x, mouseLocationClient.y)
-
-    // Now that the coordinates are in the correct coordinate system, they can be used
-    // to solve data points, or further translated to any Axis.
-
-    // (1) Translate mouse location an Axis.
-    const mouseLocationAxis = translatePoint(
-        mouseLocationEngine,
-        // Source coordinate system.
-        chart.engine.scale,
-        // Target coordinate system.
-        series[0].scale,
-    )
-
-    // (2) Solve nearest data point from a series to the mouse.
-    const nearestDataPoint = series.solveNearestFromScreen(mouseLocationEngine)
-    // `nearestDataPoint` is either `undefined`, or an object
-    // which contains a collection of information about the solved data point.
+    // ... or translated to a pair of Axes
+    const mouseLocationAxis = chart.translateCoordinate(event, chart.coordsAxis)
 })
 ```
 
@@ -68,7 +52,6 @@ More custom cursor examples can be found by looking for "cursor" tag in the _Int
 ## API Links
 
 * [Lightning Chart top reference]
-* [Coordinate system translation method]
 * [Auto cursor modes]
 * [UI element builders]
 * [UI layout builders]
@@ -104,18 +87,17 @@ Direct developer email support can be purchased through a [Support Plan][4] or b
 © LightningChart Ltd 2009-2022. All rights reserved.
 
 
-[Lightning Chart top reference]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/interfaces/LightningChart.html
-[Coordinate system translation method]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/functions/translatePoint.html
-[Auto cursor modes]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/enums/AutoCursorModes.html
-[UI element builders]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/variables/UIElementBuilders.html
-[UI layout builders]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/variables/UILayoutBuilders.html
-[UI backgrounds]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/variables/UIBackgrounds.html
-[UI position origin]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/variables/UIOrigins.html
-[Color factory hexadecimal]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/functions/ColorHEX.html
-[Color factory css]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/functions/ColorCSS.html
-[Solid fill style]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/classes/SolidFill.html
-[Solid line style]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/classes/SolidLine.html
-[Chart XY]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/classes/ChartXY.html
-[Axis XY]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/classes/Axis.html
-[Custom tick]: https://lightningchart.com/lightningchart-js-api-documentation/v4.1.0/classes/CustomTick.html
+[Lightning Chart top reference]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/interfaces/LightningChart.html
+[Auto cursor modes]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/enums/AutoCursorModes.html
+[UI element builders]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/variables/UIElementBuilders.html
+[UI layout builders]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/variables/UILayoutBuilders.html
+[UI backgrounds]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/variables/UIBackgrounds.html
+[UI position origin]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/variables/UIOrigins.html
+[Color factory hexadecimal]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/functions/ColorHEX.html
+[Color factory css]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/functions/ColorCSS.html
+[Solid fill style]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/classes/SolidFill.html
+[Solid line style]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/classes/SolidLine.html
+[Chart XY]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/classes/ChartXY.html
+[Axis XY]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/classes/Axis.html
+[Custom tick]: https://lightningchart.com/js-charts/api-documentation/v4.2.0/classes/CustomTick.html
 

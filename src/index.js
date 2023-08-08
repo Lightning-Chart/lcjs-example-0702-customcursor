@@ -11,7 +11,7 @@ const lcjs = require('@arction/lcjs')
 const { createProgressiveTraceGenerator } = require('@arction/xydata')
 
 // Extract required parts from LightningChartJS.
-const { lightningChart, AutoCursorModes, UIElementBuilders, UILayoutBuilders, UIOrigins, translatePoint, Themes } = lcjs
+const { lightningChart, AutoCursorModes, UIElementBuilders, UILayoutBuilders, UIOrigins, Themes } = lcjs
 
 // Create a XY Chart.
 const chart = lightningChart()
@@ -51,7 +51,7 @@ Promise.all(
     chart.forEachAxis((axis) => axis.fit(false))
     requestAnimationFrame(() => {
         // Show custom cursor at start automatically.
-        showCursorAt({ x: window.innerWidth * 0.4, y: window.innerHeight / 2 })
+        showCursorAt({ clientX: window.innerWidth * 0.4, clientY: window.innerHeight / 2 })
     })
 })
 
@@ -98,12 +98,12 @@ resultTable.setVisible(false)
 tickX.setVisible(false)
 ticksY.forEach((tick) => tick.setVisible(false))
 
-const showCursorAt = (mouseLocationEngine) => {
+const showCursorAt = (clientCoordinate) => {
     // Translate mouse location to Axis.
-    const mouseLocationAxis = translatePoint(mouseLocationEngine, chart.engine.scale, series[0].scale)
+    const mouseLocationAxis = chart.translateCoordinate(clientCoordinate, chart.coordsAxis)
 
     // Solve nearest data point to the mouse on each series.
-    const nearestDataPoints = series.map((el) => el.solveNearestFromScreen(mouseLocationEngine))
+    const nearestDataPoints = series.map((el) => el.solveNearestFromScreen(clientCoordinate))
 
     // Find the nearest solved data point to the mouse.
     const nearestPoint = nearestDataPoints.reduce((prev, curr, i) => {
@@ -158,11 +158,7 @@ const showCursorAt = (mouseLocationEngine) => {
 
 // Implement custom cursor logic with events.
 const mouseMoveEventHandler = (_, event) => {
-    const mouseLocationClient = { x: event.clientX, y: event.clientY }
-    // Translate mouse location to LCJS coordinate system for solving data points from series, and translating to Axes.
-    const mouseLocationEngine = chart.engine.clientLocation2Engine(mouseLocationClient.x, mouseLocationClient.y)
-
-    showCursorAt(mouseLocationEngine)
+    showCursorAt(event)
 }
 
 chart.onSeriesBackgroundMouseMove(mouseMoveEventHandler)
