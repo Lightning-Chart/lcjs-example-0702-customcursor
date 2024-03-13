@@ -16,7 +16,7 @@ const { lightningChart, AutoCursorModes, UIElementBuilders, UILayoutBuilders, UI
 // Create a XY Chart.
 const chart = lightningChart()
     .ChartXY({
-        theme: Themes[new URLSearchParams(window.location.search).get('theme') || 'darkGold'] || undefined,
+        theme: Themes[new URLSearchParams(window.location.search).get('theme') || 'darkGold'] || undefined
     })
     // Disable native AutoCursor to create custom
     .setAutoCursorMode(AutoCursorModes.disabled)
