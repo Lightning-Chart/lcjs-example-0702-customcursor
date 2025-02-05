@@ -57,7 +57,7 @@ const cursorValueDisplays = channels.map((ch) =>
         .setVisible(false)
         .setMargin(0)
         .setOn(true)
-        .setMouseInteractions(false),
+        .setPointerEvents(false),
 )
 const cursorTimeTick = timeAxis.addCustomTick(UIElementBuilders.PointableTextBox).setVisible(false)
 chart.setCustomCursor((_, __, hits) => {
