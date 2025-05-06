@@ -60,7 +60,8 @@ const cursorValueDisplays = channels.map((ch) =>
         .setPointerEvents(false),
 )
 const cursorTimeTick = timeAxis.addCustomTick(UIElementBuilders.PointableTextBox).setVisible(false)
-chart.setCustomCursor((_, __, hits) => {
+chart.setCustomCursor((event) => {
+    const { hits } = event
     if (!hits) {
         cursorValueDisplays.forEach((ui) => ui.setVisible(false))
         cursorTimeTick.setVisible(false)
