@@ -15,6 +15,7 @@ const lc = lightningChart({
         })
 const chart = lc
     .ChartXY({
+        legend: { visible: false },
         theme: Themes[new URLSearchParams(window.location.search).get('theme') || 'darkGold'] || undefined,
     })
     .setTitle('Custom cursor chart')
@@ -22,7 +23,7 @@ const chart = lc
 const timeAxis = chart
     .getDefaultAxisX()
     .setTickStrategy(AxisTickStrategies.Time)
-    .setScrollStrategy(AxisScrollStrategies.progressive)
+    .setScrollStrategy(AxisScrollStrategies.scrolling)
     .setDefaultInterval((state) => ({
         end: state.dataMax ?? 0,
         start: (state.dataMax ?? 0) - 10_000,
@@ -37,12 +38,9 @@ const channels = new Array(3).fill(0).map((_, i) => {
         .setTitle(`Channel ${i + 1}`)
         .setTitleRotation(0)
         .setStrokeStyle(emptyLine)
-        .setAutoRegionsEnabled(false)
+        .setScrollMargins(false)
     yAxis.setMargins(2, 2)
-    const series = chart
-        .addPointLineAreaSeries({ yAxis, dataPattern: 'ProgressiveX' })
-        .setAreaFillStyle(emptyFill)
-        .setMaxSampleCount(50_000)
+    const series = chart.addLineSeries({ yAxis }).setMaxSampleCount(50_000)
     return { yAxis, series }
 })
 
