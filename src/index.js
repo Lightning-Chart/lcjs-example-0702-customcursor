@@ -8,7 +8,7 @@
 const lcjs = require('@lightningchart/lcjs')
 
 // Extract required parts from LightningChartJS.
-const { lightningChart, UIElementBuilders, AxisTickStrategies, UIOrigins, emptyLine, AxisScrollStrategies, emptyFill } = lcjs
+const { lightningChart, UIElementBuilders, AxisTickStrategies, UIOrigins, emptyLine, AxisScrollStrategies, emptyFill, Themes } = lcjs
 
 const lc = lightningChart({
             resourcesBaseUrl: new URL(document.head.baseURI).origin + new URL(document.head.baseURI).pathname + 'resources/',
