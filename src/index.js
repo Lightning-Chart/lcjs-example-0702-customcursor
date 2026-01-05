@@ -72,7 +72,6 @@ chart.setCustomCursor((event) => {
             .setText(`${hit.series.getName()} ${hit.axisY.formatValue(hit.y)}`)
             .setPosition({ x: timeAxis.getInterval().start, y: hit.axisY.getInterval().end })
             .setOrigin(UIOrigins.LeftTop)
-        hit.series.styleLegendEntry(ui)
     })
     cursorTimeTick.setVisible(true).setValue(hits[0].x)
 })
